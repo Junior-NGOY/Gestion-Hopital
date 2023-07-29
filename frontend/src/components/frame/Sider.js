@@ -55,6 +55,48 @@ function Sider() {
             </NavLink>
           </li>
           <li className="nav-item">
+            <NavLink to="/examens" className="nav-link">
+              <i className="far fa-circle nav-icon"></i>
+                    <p>Examen</p>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/details" className="nav-link">
+              <i className="far fa-circle nav-icon"></i>
+                    <p>Detail Examen</p>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/terrains" className="nav-link">
+              <i className="far fa-circle nav-icon"></i>
+                    <p>Terrain</p>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/categories" className="nav-link">
+              <i className="far fa-circle nav-icon"></i>
+                    <p>Catégorie</p>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/produits" className="nav-link">
+              <i className="far fa-circle nav-icon"></i>
+                    <p>Produit</p>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/motifs" className="nav-link">
+              <i className="far fa-circle nav-icon"></i>
+                    <p>Motif</p>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/consultations" className="nav-link">
+              <i className="far fa-circle nav-icon"></i>
+                    <p>Consultation</p>
+            </NavLink>
+          </li>
+          <li className="nav-item">
             <a href="/" className="nav-link">
               <i className="nav-icon fas fa-tachometer-alt"></i>
               <p>

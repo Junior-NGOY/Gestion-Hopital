@@ -5,24 +5,23 @@ const RdvContext = createContext();
 axios.defaults.baseURL='http://127.0.0.1:8000/api/';//lien vers le backend
 
 export const RdvProvider = ({children}) => {
-    const [patients, setPatients]=useState([]);
-    const [users, setUsers]=useState([]);
+
     const [rdvs, setRdvs]=useState([]);
-    const [user, setUser]=useState([]);
+    const [rdv, setRdv]=useState([]);
     const [errors, setErrors]=useState([]);
     const navigate = useNavigate();
    
-    const storeUser = async (data)=>{
+    const storeRdv = async (data)=>{
         try {
-            //console.log(data);
-            await axios.post('users',data,{
+            console.log(data);
+            await axios.post('rdvs',data,{
                 headers: { "Content-Type": "aplication/json" },
               }).then(function (resp) {
-            console.log("User ajouté avec succès");
-                navigate('/users');
+            console.log("Rendez-vous ajouté avec succès");
+                navigate('/rdvs');
               })
               .catch(function (err) {
-                console.log(err.response.errors);
+                console.log(err.response);
               });
          
         } catch (e) {
@@ -32,17 +31,17 @@ export const RdvProvider = ({children}) => {
                // }
                console.log(e.response)
             }
-        const apiUsers = await axios.get('users');
-        setUsers(apiUsers.data.data);
+        const apiRdvs = await axios.get('rdvs');
+        setRdvs(apiRdvs.data.data);
     };
-    const updateUser = async (data)=> {
+    const updateRdv = async (data)=> {
         try {
             console.log(data)
-            await axios.put('users/'+user.id, data,{
+            await axios.put('rdvs/'+rdv.id, data,{
                 headers: { "Content-Type": "aplication/json" },
               }).then(function (resp) {
                 console.log(resp.data);
-                navigate('/users');
+                navigate('/rdvs');
               })
               .catch(function (err) {
                 console.error(err.response.data);
@@ -52,19 +51,11 @@ export const RdvProvider = ({children}) => {
                 setErrors(e.response.data.errors)
             }
         }
-        const apiUsers = await axios.get('users');
-        setPatients(apiUsers.data.data);
+        const apiRdvs = await axios.get('rdvs');
+        setRdvs(apiRdvs.data.data);
     };
-   
-    const getRdvs = async () =>{
-        try {
-            console.log("Ok je suis devant la requete")
-        } catch (error) {
-            
-        }
-    }
-    
-    async function getRdvss(){
+       
+    async function getRdvs(){
         try {
             const apiRdvs = await axios.get('rdvs');
              setRdvs(apiRdvs.data.data);
@@ -72,25 +63,25 @@ export const RdvProvider = ({children}) => {
             console.error(error.response.data); 
         }
     };
-    const getUser = async (id)=> {
+    const getRdv = async (id)=> {
         try {
-            const response = await axios.get('users/' + id);
-            const apiUser=response.data.data
+            const response = await axios.get('rdvs/' + id);
+            const apiRdv=response.data.data
            // const apiUser=response.data
-            console.log(apiUser)
-            setUser(apiUser);
+            console.log(apiRdv)
+            setRdv(apiRdv);
         } catch (error) {
             
         }
        
     };
-    const deleteUser = async (id)=> {
+    const deleteRdv = async (id)=> {
         try {
-            if(!window.confirm("Voulez-vous supprimer user ?")){
+            if(!window.confirm("Voulez-vous supprimer ce rendez-vous ?")){
                 return;
             }
-            await axios.delete('users/' + id);
-            navigate('/users');
+            await axios.delete('rdvs/' + id);
+            navigate('/rdvs');
             console.log("c'est fait ....ok")
             getRdvs();
         } catch (error) {
@@ -100,8 +91,8 @@ export const RdvProvider = ({children}) => {
     };
     return  (
     <RdvContext.Provider 
-        value={{user,rdvs,getUser,getRdvs,
-             storeUser, errors,setErrors, updateUser,deleteUser}}
+        value={{rdv,rdvs,getRdv,getRdvs,
+             storeRdv, errors,setErrors, updateRdv,deleteRdv}}
     >
         {children}
     </RdvContext.Provider>)

@@ -11,22 +11,22 @@ class RdvController extends Controller
 {
     public function index(){
         //  return new PatientCollection(Patient::orderBy('id', 'desc')->paginate(5));
-        return Rdv::orderBy('id', 'desc')->paginate(5);
+        return Rdv::with(["patient","user"])->orderBy('id', 'desc')->paginate(5);
        
   }
-  public function destroy(Rdv $user){
-      $user->delete();
-      return response()->json('User Deleted');
+  public function destroy(Rdv $rdv){
+      $rdv->delete();
+      return response()->json('Rdv Deleted');
   }
   public function store(StoreRdvRequest $request){
       Rdv::create($request->validated());
-      return response()->json('User Created');
+      return response()->json('Rdv Created');
   }
-  public function update(StoreRdvRequest $request, Rdv $user){
-      $user->update($request->validated());
-      return response()->json('User Updated');
+  public function update(StoreRdvRequest $request, Rdv $rdv){
+      $rdv->update($request->validated());
+      return response()->json('Rdv Updated');
   }
-  public function show(Rdv $user){
-      return new RdvResource($user);
+  public function show(Rdv $rdv){
+      return new RdvResource($rdv);
   }
 }

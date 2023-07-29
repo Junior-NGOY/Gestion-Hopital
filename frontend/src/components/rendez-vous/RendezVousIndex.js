@@ -1,5 +1,5 @@
 import  { useEffect, useContext, React } from 'react';
-import RdvContext from '../../contexts/UserContext';
+import RdvContext from '../../contexts/RdvContext';
 import{ NavLink}  from 'react-router-dom';
 import {
   faEdit,
@@ -10,11 +10,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function RendezVousIndex() {
-    const {rdvs,getRdvs,deleteUser}=useContext(RdvContext);
+    const {rdvs,getRdvs,deleteRdv}=useContext(RdvContext);
 
     useEffect(()=>{
         getRdvs();
-    }, [])
+    }, [getRdvs])
   return (
     <>
       <section className="content-header">
@@ -36,7 +36,7 @@ function RendezVousIndex() {
         <div className="container-fluid">
           <div className="card card-primary card-outline">
             <div className="card-header">
-              <h3 className="card-title"><NavLink to="/user/create"><button className='btn btn-outline-info'>
+              <h3 className="card-title"><NavLink to="/rdv/create"><button className='btn btn-outline-info'>
                 <FontAwesomeIcon icon={faPlusCircle}></FontAwesomeIcon>  Rendez-vous</button></NavLink></h3>
               <form  className="row float-right">
                     <div className="col-auto">
@@ -58,10 +58,11 @@ function RendezVousIndex() {
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Prénom</th>
-                  <th scope="col">Nom</th>
-                  <th scope="col">Post-nom</th>
-                  <th scope="col">Adresse</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Heure</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Patient</th>
+                  <th scope="col">Médecin</th>
                   <th scope="col">Action</th>
                   <th scope="col">Action</th>
                 </tr>
@@ -74,11 +75,12 @@ function RendezVousIndex() {
                       <td>{rdv.dateRDV}</td>
                       <td>{rdv.heureRDV}</td>
                       <td>{rdv.type}</td>
-                      <td>{rdv.adresse}</td>
+                      <td>{rdv.patient.prenom} {rdv.patient.nom}</td>
+                      <td>{rdv.user.prenom}  {rdv.user.nom}</td>
                       <td><NavLink to={`/rdv/${rdv.id}/edit`} ><button className='btn btn-outline-success btn-sm'>
                         <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
                       </button></NavLink></td>   
-                      <td><button className='btn btn-outline-danger btn-sm' onClick={() => deleteUser(rdv.id)}>
+                      <td><button className='btn btn-outline-danger btn-sm' onClick={() => deleteRdv(rdv.id)}>
                         <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                         </button></td>  
                   </tr>

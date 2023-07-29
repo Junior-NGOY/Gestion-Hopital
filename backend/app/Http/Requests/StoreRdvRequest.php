@@ -24,7 +24,9 @@ class StoreRdvRequest extends FormRequest
         return [
             'dateRDV'=>['required'],
             'heureRDV'=>['required'],
-            'type'=>['required']
+            'type'=>['required'],
+            'user_id'=>['required'],
+            'patient_id'=>['required']
         ];
     }
 }
