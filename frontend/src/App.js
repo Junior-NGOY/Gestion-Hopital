@@ -7,12 +7,14 @@ import Sider from './components/frame/Sider';
 import { UserProvider } from './contexts/UserContext';
 import { PatientProvider } from './contexts/PatientContext';
 import { StructureProvider } from './contexts/StructureContext';
+import { RdvProvider } from './contexts/RdvContext';
 //import { useAppState } from './repository/StructureRepository';
 
 
 function App() {
   return (
     <StructureProvider >
+    <RdvProvider >
     <UserProvider >
     <PatientProvider >
     <div>
@@ -25,6 +27,7 @@ function App() {
     </div>
     </PatientProvider>
     </UserProvider>
+    </RdvProvider>
     </StructureProvider>
   );
 }

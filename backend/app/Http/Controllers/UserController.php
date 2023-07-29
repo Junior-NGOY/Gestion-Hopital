@@ -9,25 +9,25 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index(){
+  public function index(){
        
         //  return new PatientCollection(Patient::orderBy('id', 'desc')->paginate(5));
         return User::orderBy('id', 'desc')->paginate(5);
        
   }
-  public function destroy(User $patient){
-      $patient->delete();
+  public function destroy(User $user){
+      $user->delete();
       return response()->json('User Deleted');
   }
   public function store(StoreUserRequest $request){
       User::create($request->validated());
       return response()->json('User Created');
   }
-  public function update(StoreUserRequest $request, User $patient){
-      $patient->update($request->validated());
+  public function update(StoreUserRequest $request, User $user){
+      $user->update($request->validated());
       return response()->json('User Updated');
   }
-  public function show(User $patient){
-      return new UserResource($patient);
+  public function show(User $user){
+      return new UserResource($user);
   }
 }

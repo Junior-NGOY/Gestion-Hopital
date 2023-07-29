@@ -22,7 +22,20 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+                'prenom'=>['required', 'min:3', 'max:40'],
+                'nom'=>['required'],
+                'postnom'=>['required'], 
+                'sexe'=>['required'], 
+                'etatcivil'=>['required'],
+                'lieunais'=>['required'], 
+                'datenais'=>['required'], 
+                'telephone'=>['required'], 
+                'adresse'=>['required'], 
+                'fonction'=>['required'], 
+                'specialite'=>['required'],
+                'numord'=>['required'], 
+                'password'=>['required'], 
+                'email'=>['required'], 
         ];
     }
 }

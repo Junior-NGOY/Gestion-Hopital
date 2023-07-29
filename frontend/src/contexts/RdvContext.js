@@ -1,14 +1,13 @@
 import { createContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const UserContext = createContext();
+const RdvContext = createContext();
 axios.defaults.baseURL='http://127.0.0.1:8000/api/';//lien vers le backend
 
-export const UserProvider = ({children}) =>{
-  
-   // const [formValues, setFormValues] = useState(initialFom);
+export const RdvProvider = ({children}) => {
     const [patients, setPatients]=useState([]);
     const [users, setUsers]=useState([]);
+    const [rdvs, setRdvs]=useState([]);
     const [user, setUser]=useState([]);
     const [errors, setErrors]=useState([]);
     const navigate = useNavigate();
@@ -57,11 +56,18 @@ export const UserProvider = ({children}) =>{
         setPatients(apiUsers.data.data);
     };
    
-    async function getUsers(){
+    const getRdvs = async () =>{
         try {
-            const apiUsers = await axios.get('users');
-            //console.log("Ok")
-            setUsers(apiUsers.data.data);
+            console.log("Ok je suis devant la requete")
+        } catch (error) {
+            
+        }
+    }
+    
+    async function getRdvss(){
+        try {
+            const apiRdvs = await axios.get('rdvs');
+             setRdvs(apiRdvs.data.data);
         } catch (error) {
             console.error(error.response.data); 
         }
@@ -86,18 +92,18 @@ export const UserProvider = ({children}) =>{
             await axios.delete('users/' + id);
             navigate('/users');
             console.log("c'est fait ....ok")
-            getUsers();
+            getRdvs();
         } catch (error) {
             console.error(error.response.data);
         }
         
     };
     return  (
-    <UserContext.Provider 
-        value={{user,users,getUser,getUsers,
+    <RdvContext.Provider 
+        value={{user,rdvs,getUser,getRdvs,
              storeUser, errors,setErrors, updateUser,deleteUser}}
     >
         {children}
-    </UserContext.Provider>)
+    </RdvContext.Provider>)
 };
-export default  UserContext;
+export default  RdvContext;

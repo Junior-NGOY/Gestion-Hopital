@@ -1,5 +1,5 @@
 import  { useEffect, useContext, React } from 'react';
-import UserContext from '../../contexts/UserContext';
+import RdvContext from '../../contexts/UserContext';
 import{ NavLink}  from 'react-router-dom';
 import {
   faEdit,
@@ -9,25 +9,24 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function UserIndex() {
-    const {users,getUsers,deleteUser}=useContext(UserContext);
+function RendezVousIndex() {
+    const {rdvs,getRdvs,deleteUser}=useContext(RdvContext);
 
-  useEffect(()=>{
-    getUsers();
-  }, [])
+    useEffect(()=>{
+        getRdvs();
+    }, [])
   return (
-    <div>
     <>
       <section className="content-header">
         <div className="container-fluid">
           <div className="row mb-2">
             <div className="col-sm-6">
-              <h1>Personnels</h1> 
+              <h1>Rendez-vous</h1> 
             </div>
             <div className="col-sm-6">
               <ol className="breadcrumb float-sm-right">
                 <li className="breadcrumb-item"><NavLink href="#">Accueil</NavLink></li>
-                <li className="breadcrumb-item active">Personnels</li>
+                <li className="breadcrumb-item active">Rendez-vous</li>
               </ol>
             </div>
           </div>
@@ -38,7 +37,7 @@ function UserIndex() {
           <div className="card card-primary card-outline">
             <div className="card-header">
               <h3 className="card-title"><NavLink to="/user/create"><button className='btn btn-outline-info'>
-                <FontAwesomeIcon icon={faPlusCircle}></FontAwesomeIcon>  Utilisateur</button></NavLink></h3>
+                <FontAwesomeIcon icon={faPlusCircle}></FontAwesomeIcon>  Rendez-vous</button></NavLink></h3>
               <form  className="row float-right">
                     <div className="col-auto">
                       <input
@@ -68,18 +67,18 @@ function UserIndex() {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user, index)=>{
+                {rdvs?.map((rdv, index)=>{
                   return(
-                    <tr key={user.id}>
+                    <tr key={rdv.id}>
                       <th scope="row">{index + 1}</th>
-                      <td>{user.prenom}</td>
-                      <td>{user.nom}</td>
-                      <td>{user.postnom}</td>
-                      <td>{user.adresse}</td>
-                      <td><NavLink to={`/user/${user.id}/edit`} ><button className='btn btn-outline-success btn-sm'>
+                      <td>{rdv.dateRDV}</td>
+                      <td>{rdv.heureRDV}</td>
+                      <td>{rdv.type}</td>
+                      <td>{rdv.adresse}</td>
+                      <td><NavLink to={`/rdv/${rdv.id}/edit`} ><button className='btn btn-outline-success btn-sm'>
                         <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
                       </button></NavLink></td>   
-                      <td><button className='btn btn-outline-danger btn-sm' onClick={() => deleteUser(user.id)}>
+                      <td><button className='btn btn-outline-danger btn-sm' onClick={() => deleteUser(rdv.id)}>
                         <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                         </button></td>  
                   </tr>
@@ -92,8 +91,7 @@ function UserIndex() {
         </div> 
       </section>
     </>
-    </div>
   )
 }
 
-export default UserIndex
+export default RendezVousIndex

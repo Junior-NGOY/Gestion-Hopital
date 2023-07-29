@@ -13,6 +13,11 @@ import UserIndex from '../utilisateur/UserIndex';
 import UserCreate from '../utilisateur/UserCreate';
 import UserEdit from '../utilisateur/UserEdit';
 
+//Rendez-vous
+import RendezVousIndex from '../rendez-vous/RendezVousIndex';
+import RendezVousCreate from '../rendez-vous/RendezVousCreate';
+import RendezVousEdit from '../rendez-vous/RendezVousEdit';
+
 function Content() {
   return (
     <div> 
@@ -28,6 +33,10 @@ function Content() {
             <Route path="/users" element={<UserIndex />}></Route>
             <Route path="/user/create" element={<UserCreate />}></Route>
             <Route path="/user/:id/edit" element={<UserEdit />}></Route>
+
+            <Route path="/rdvs" element={<RendezVousIndex />}></Route>
+            <Route path="/rdv/create" element={<RendezVousCreate />}></Route>
+            <Route path="/rdv/:id/edit" element={<RendezVousEdit />}></Route>
         </Routes>
     </div>
   )

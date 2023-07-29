@@ -49,6 +49,12 @@ function Sider() {
             </NavLink>
           </li>
           <li className="nav-item">
+            <NavLink to="/rdvs" className="nav-link">
+              <i className="far fa-circle nav-icon"></i>
+                    <p>Rendez-vous</p>
+            </NavLink>
+          </li>
+          <li className="nav-item">
             <a href="/" className="nav-link">
               <i className="nav-icon fas fa-tachometer-alt"></i>
               <p>
